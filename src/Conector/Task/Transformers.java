@@ -5,6 +5,8 @@
  */
 package Conector.Task;
 
+import Conector.Slot;
+
 /**
  *
  * @author alberto
@@ -21,15 +23,29 @@ public class Transformers {
         Divide un mensaje de entrada formado por una lista de elementos en tantos mensajes como elementos tenga
         Entradas: 1, Salidas: 1
     */
-    void Splitter(){
-        
+    public Slot[] Splitter(Slot entrada){
+        Slot salida[] = new Slot[entrada.getCantidad()];
+        for (int i = 0; i < entrada.getCantidad(); i++) {
+            salida[i].setName(entrada.getName(i), 0);
+            salida[i].setType(entrada.getType(i), 0);
+            salida[i].setCantidad(0);
+            salida[i].setStock(entrada.getStock(i), 0);
+        }
+        return salida;
     }
     /*
         Reconstruye un mensaje divido previamente por una tarea Splitter
         Entradas: 1, Salidas: 1
     */
-    void Aggregator(){
-        
+    public Slot Aggregator(Slot[] entrada){
+        Slot salida = new Slot();
+        for (int i = 0; i < entrada.length; i++) {
+            salida.setCantidad(entrada.length);
+            salida.setName(entrada[i].getName(0), i);
+            salida.setStock(entrada[i].getStock(0), i);
+            salida.setType(entrada[i].getType(0), i);
+        }
+        return salida;
     }
     /*
         Divide un mensaje de entrada en varios mensajes de salida y los ofrece en una salida diferente
