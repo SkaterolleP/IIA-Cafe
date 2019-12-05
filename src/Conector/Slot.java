@@ -11,22 +11,32 @@ package Conector;
  */
 public class Slot {
 
-    private int type;
-    private String name;
+    private int type[];
+    private String name[];
     private int idco;
-    private int stock;
+    private int stock[];
+    private int cantidad;
 
-    Slot(int can, int ty, String na) {
-        type = ty;
-        name = na;
+    public Slot(){
+        
+    }
+    Slot(int can, int ty[], String na[]) {
+        cantidad = can;
+        type = new int[can];
+        name = new String[can];
+        stock = new int[can];
+        for (int i = 0; i < can; i++) {
+            type[i] = ty[i];
+            name[i] = na[i];
+        }
     }
 
-    public int getType() {
-        return type;
+    public int getType(int i) {
+        return type[i];
     }
 
-    public String getName() {
-        return name;
+    public String getName(int i) {
+        return name[i];
     }
 
     public int getIdco() {
@@ -37,12 +47,28 @@ public class Slot {
         this.idco = idco;
     }
 
-    public int getStock() {
-        return stock;
+    public int getStock(int i) {
+        return stock[i];
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setType(int type, int i) {
+        this.type[i] = type;
+    }
+
+    public void setName(String name, int i) {
+        this.name[i] = name;
+    }
+
+    public void setStock(int stock, int i) {
+        this.stock[i] = stock;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
 }
