@@ -27,8 +27,7 @@ public class Modifiers {
     }
     /*
         Añade contenido al cuerpo del mensaje de entrada a partir de la información de contexto ofrecida en la entrada “contexto”
-        Entradas: 2 (contexto y entrada), Salidas: 1
-
+        Entradas: 2 (contexto y entrada), Salidas: 1 *****
     */
     void ContextEnricher(){
         

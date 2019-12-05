@@ -12,14 +12,14 @@ package Conector.Task;
 public class Routers {
     /*  
         Correlaciona los mensajes en sus distintas entradas y los pone ordenados en sus respectivas salidas
-        Entradas: n,  Salidas: n (mismo número)
+        Entradas: n,  Salidas: n (mismo número) *****
     */
     void Correlator(){
         
     }
     /*  
         Enruta mensajes de diferentes entradas hacia una misma salida
-        Entradas: n, Salidas: 1
+        Entradas: n, Salidas: 1 *****
     */
     void Merger(){
         
@@ -33,14 +33,14 @@ public class Routers {
     }
     /*
         Distribuye los mensajes de entrada hacia una o más salidas en función de un criterio
-        Entradas: 1, Salidas: n
+        Entradas: 1, Salidas: n *****
     */
     void Distributor(){
         
     }
     /*
         Distribuye los mensajes de entrada hacia las salidas
-        Entradas: 1, Salidas: n
+        Entradas: 1, Salidas: n ****
 
     */
     void Replicator(){

@@ -1,0 +1,10 @@
+<drinks>
+    <drink>
+        <name> cafe late </name>
+        <type> hot </type>
+    </drink>
+    <drink>
+        <name> Te verde </name>
+        <type> hot </type>
+    </drink>
+</drinks>

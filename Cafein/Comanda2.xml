@@ -1,0 +1,10 @@
+<drinks>
+    <drink>
+        <name> cafe </name>
+        <type> cold </type>
+    </drink>
+    <drink>
+        <name> colacao </name>
+        <type> hot </type>
+    </drink>
+</drinks>

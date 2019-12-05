@@ -16,6 +16,8 @@ public class IIA {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Lector i = new Lector();
+        i.lector("Cafein/Comanda1.xml");
     }
     
 }

@@ -14,14 +14,14 @@ import Conector.Slot;
 public class Transformers {
     /*
         Transforma el cuerpo de un mensaje de un esquema a otro
-        Entradas: 1, Salidas: 1
+        Entradas: 1, Salidas: 1 *****
     */
     void Translator(){
         
     }
     /*
         Divide un mensaje de entrada formado por una lista de elementos en tantos mensajes como elementos tenga
-        Entradas: 1, Salidas: 1
+        Entradas: 1, Salidas: 1 *****
     */
     public Slot[] Splitter(Slot entrada){
         Slot salida[] = new Slot[entrada.getCantidad()];
@@ -35,7 +35,7 @@ public class Transformers {
     }
     /*
         Reconstruye un mensaje divido previamente por una tarea Splitter
-        Entradas: 1, Salidas: 1
+        Entradas: 1, Salidas: 1 *****
     */
     public Slot Aggregator(Slot[] entrada){
         Slot salida = new Slot();
