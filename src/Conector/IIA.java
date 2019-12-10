@@ -40,6 +40,9 @@ public class IIA {
     private static Queue<Slot> ContMerg2 = new LinkedList<>();
     private static Queue<Slot> MergeAgre = new LinkedList<>();
 
+    private static void correlator(Queue<Slot> entrada1, Queue<Slot> entrada2){
+        r.Correlator(entrada1, entrada2, entrada1, entrada2);
+    }
     private static void Translator(Queue<Slot> entrada, Queue<Slot> salida, Conenctor cd) {
         try {
             //System.out.println("Tamaño entrada:"+entrada.size());
@@ -127,9 +130,9 @@ public class IIA {
         }).start();
         sl(20);
         //System.out.println(ReplTrans1.size());
-        //Translator(ReplTrans2, BDcold, c);
-        //Translator(ReplTrans1, BDhot, c);
-        
+        Translator(ReplTrans2, BDcold, c);
+        Translator(ReplTrans1, BDhot, c);
+        /*
         new Thread(
                 new Runnable() {
             public void run() {
@@ -143,7 +146,19 @@ public class IIA {
                 Translator(ReplTrans1, BDhot, c);
             }
         }).start();
-        sl(200);
+        sl(200);*/
+        
+        correlator(ReplTrans1, BDcold);
+        
+        while(!ReplTrans2.isEmpty()){
+            Slot e = ReplTrans2.poll();
+            System.out.println(e.getName(0)+"--"+e.getType(0)+"--"+e.getIdco());
+        }
+        System.out.println("-----------------");
+        while(!BDcold.isEmpty()){
+            Slot e = BDcold.poll();
+            System.out.println(e.getName(0)+"--"+e.getType(0)+"--"+e.getIdco());
+        }
 
         c.desconectar();
         //System.out.println(ReplTrans1.size()+"  "+ReplCorre1.size());
