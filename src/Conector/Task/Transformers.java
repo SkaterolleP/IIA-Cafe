@@ -5,7 +5,9 @@
  */
 package Conector.Task;
 
+import Conector.Conenctor;
 import Conector.Slot;
+import java.sql.SQLException;
 import java.util.Queue;
 
 /**
@@ -14,12 +16,27 @@ import java.util.Queue;
  */
 public class Transformers {
 
+    Conenctor c;
+
     /*
         Transforma el cuerpo de un mensaje de un esquema a otro
         Entradas: 1, Salidas: 1 *****
      */
-    void Translator() {
-
+    public Queue<Slot> Translator(Slot entrada, Queue<Slot> salida, Conenctor cd) throws SQLException {
+        c = cd;
+        Slot e;
+        boolean h = false;
+        h = false;
+        //System.out.println("Antes de consultar");
+        h = c.consulta(entrada.getType(0).replace(" ", ""), entrada.getName(0).replace(" ", ""));
+        if (h == true) {
+            entrada.setStock(1, 0);
+        } else {
+            entrada.setStock(0, 0);
+        }
+        salida.add(entrada);
+        System.out.println("Tamaño salida al salir1:" + salida.size());
+        return salida;
     }
 
     /*

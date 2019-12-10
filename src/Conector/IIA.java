@@ -8,6 +8,7 @@ package Conector;
 import Conector.Task.Routers;
 import Conector.Task.Transformers;
 import static java.lang.Thread.sleep;
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.logging.Level;
@@ -31,6 +32,30 @@ public class IIA {
     private static Queue<Slot> ReplCorre2 = new LinkedList<>();
     private static Queue<Slot> BDhot = new LinkedList<>();
     private static Queue<Slot> BDcold = new LinkedList<>();
+    private static Queue<Slot> BDcoldCont = new LinkedList<>();
+    private static Queue<Slot> BDhotCont = new LinkedList<>();
+    private static Queue<Slot> ReplCorreCont1 = new LinkedList<>();
+    private static Queue<Slot> ReplCorreCont2 = new LinkedList<>();
+    private static Queue<Slot> ContMerg1 = new LinkedList<>();
+    private static Queue<Slot> ContMerg2 = new LinkedList<>();
+    private static Queue<Slot> MergeAgre = new LinkedList<>();
+
+    private static void Translator(Queue<Slot> entrada, Queue<Slot> salida, Conenctor cd) {
+        try {
+            //System.out.println("Tamaño entrada:"+entrada.size());
+            //System.out.println("Tamaño salida:"+salida.size());
+            Slot e = null;
+            //System.out.println("Entro en Translator");
+            while (!entrada.isEmpty()) {
+                e = entrada.poll();
+                //System.out.println(e.getName(0)+"--"+e.getType(0));
+                salida = a.Translator(e, salida, cd);
+                //System.out.println("Tamaño salida al salir2:"+salida.size());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(IIA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     private static void Splitter(Queue<Slot> entrada, Queue<Slot> salida) {
         while (!entrada.isEmpty()) {
@@ -62,25 +87,38 @@ public class IIA {
     public static void main(String[] args) {
 
         Lector i = new Lector();
+        Conenctor c = new Conenctor();
+        c.conectar();
         Cafein = i.leert("Cafein/");
         //System.out.println(Cafein.size());
         //Thread hilo1 = new Thread(a);
         new Thread(
                 () -> {
                     Splitter(Cafein, SpliDistr);
-        }).start();
+                }).start();
         sl(90);
         new Thread(
                 () -> {
                     Distributor(SpliDistr, DistrRepl1, DistrRepl2);
-        }).start();
+                }).start();
         sl(20);
         //System.out.println(DistrRepl1.size());
         //System.out.println(DistrRepl2.size());
+        /*
+        while(!DistrRepl1.isEmpty()){
+            Slot e = DistrRepl1.poll();
+            System.out.println(e.getName(0)+"--"+e.getType(0));
+        }
+        System.out.println("-----------------");
+        while(!DistrRepl2.isEmpty()){
+            Slot e = DistrRepl2.poll();
+            System.out.println(e.getName(0)+"--"+e.getType(0));
+        }
+        */
         new Thread(
                 () -> {
                     Replicator(DistrRepl1, ReplTrans1, ReplCorre1);
-        }).start();
+                }).start();
         new Thread(
                 new Runnable() {
             public void run() {
@@ -88,6 +126,26 @@ public class IIA {
             }
         }).start();
         sl(20);
+        //System.out.println(ReplTrans1.size());
+        //Translator(ReplTrans2, BDcold, c);
+        //Translator(ReplTrans1, BDhot, c);
+        
+        new Thread(
+                new Runnable() {
+            public void run() {
+                Translator(ReplTrans2, BDcold, c);
+            }
+        }).start();
+        sl(200);
+        new Thread(
+                new Runnable() {
+            public void run() {
+                Translator(ReplTrans1, BDhot, c);
+            }
+        }).start();
+        sl(200);
+
+        c.desconectar();
         //System.out.println(ReplTrans1.size()+"  "+ReplCorre1.size());
         //System.out.println(ReplTrans2.size()+"  "+ReplCorre2.size());
 
