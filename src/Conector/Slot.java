@@ -5,6 +5,10 @@
  */
 package Conector;
 
+import java.util.List;
+import org.w3c.dom.Document;
+
+
 /**
  *
  * @author alberto
@@ -18,7 +22,24 @@ public class Slot {
     private int stock[];
     private int cantidad;
 
+    private List<Document> d;
+
+    public Document read() {
+        Document ret = d.get(0);
+        d.remove(0);
+        return ret;
+    }
+
+    public void write(Document di) {
+        d.add(di);
+    }
+    
+    public int getTamaño(){
+        return d.size();
+    }
+
     public Slot() {
+        d = new List<Document>() {};
         cantidad = 1;
         type = new String[1];
         name = new String[1];

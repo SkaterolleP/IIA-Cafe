@@ -6,26 +6,38 @@
 package Conector;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import java.io.StringReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 /**
  *
  * @author alberto
  */
-public class Lector {
+public class ConnectorComanda {
+
     //Utilizaré el DOM
     int id;
-    
-    Lector(){
+
+    ConnectorComanda() {
         id = 0;
     }
 
@@ -64,9 +76,20 @@ public class Lector {
         return cafe1;
     }
 
-    public Queue<Slot> leert(String direccion) {
+    private Document lector(String direccion) {
+        File file = new File(direccion);
+        Document doc = null;
+        try {
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            doc = dBuilder.parse(file);
+        } catch (IOException | ParserConfigurationException | SAXException e) {
+        }
+        return doc;
+    }
+
+    public void leert(String direccion, Slot s) {
         //String path = "Cafein/";
-        Queue<Slot> cafe = new LinkedList<>();
 
         String[] files = getFiles(direccion);
 
@@ -77,10 +100,9 @@ public class Lector {
             for (int i = 0; i < size; i++) {
 
                 //System.out.println(files[i]);
-                cafe = lector(files[i], cafe);
+                s.write(lector(files[i]));
             }
         }
-        return cafe;
     }
 
     public static String[] getFiles(String dir_path) {

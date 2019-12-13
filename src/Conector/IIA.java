@@ -43,7 +43,7 @@ public class IIA {
     private static void correlator(Queue<Slot> entrada1, Queue<Slot> entrada2){
         r.Correlator(entrada1, entrada2, entrada1, entrada2);
     }
-    private static void Translator(Queue<Slot> entrada, Queue<Slot> salida, Conenctor cd) {
+    private static void Translator(Queue<Slot> entrada, Queue<Slot> salida, BD cd) {
         try {
             //System.out.println("Tamaño entrada:"+entrada.size());
             //System.out.println("Tamaño salida:"+salida.size());
@@ -89,12 +89,15 @@ public class IIA {
 
     public static void main(String[] args) {
 
-        Lector i = new Lector();
-        Conenctor c = new Conenctor();
-        c.conectar();
-        Cafein = i.leert("Cafein/");
+        ConnectorComanda i = new ConnectorComanda();
+        //BD c = new BD();
+        //c.conectar();
+        Slot s1 = new Slot();
+        i.leert("Cafein/", s1);
+        System.out.println(s1.getTamaño());
         //System.out.println(Cafein.size());
         //Thread hilo1 = new Thread(a);
+        /*
         new Thread(
                 () -> {
                     Splitter(Cafein, SpliDistr);
@@ -117,7 +120,7 @@ public class IIA {
             Slot e = DistrRepl2.poll();
             System.out.println(e.getName(0)+"--"+e.getType(0));
         }
-        */
+        *//*
         new Thread(
                 () -> {
                     Replicator(DistrRepl1, ReplTrans1, ReplCorre1);
@@ -132,6 +135,7 @@ public class IIA {
         //System.out.println(ReplTrans1.size());
         Translator(ReplTrans2, BDcold, c);
         Translator(ReplTrans1, BDhot, c);
+        */
         /*
         new Thread(
                 new Runnable() {
@@ -147,7 +151,7 @@ public class IIA {
             }
         }).start();
         sl(200);*/
-        
+        /*
         correlator(ReplTrans1, BDcold);
         
         while(!ReplTrans2.isEmpty()){
@@ -160,7 +164,7 @@ public class IIA {
             System.out.println(e.getName(0)+"--"+e.getType(0)+"--"+e.getIdco());
         }
 
-        c.desconectar();
+        c.desconectar();*/
         //System.out.println(ReplTrans1.size()+"  "+ReplCorre1.size());
         //System.out.println(ReplTrans2.size()+"  "+ReplCorre2.size());
 

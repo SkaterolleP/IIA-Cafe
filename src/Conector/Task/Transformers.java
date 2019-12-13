@@ -5,7 +5,7 @@
  */
 package Conector.Task;
 
-import Conector.Conenctor;
+import Conector.BD;
 import Conector.Slot;
 import java.sql.SQLException;
 import java.util.Queue;
@@ -16,13 +16,13 @@ import java.util.Queue;
  */
 public class Transformers {
 
-    Conenctor c;
+    BD c;
 
     /*
         Transforma el cuerpo de un mensaje de un esquema a otro
         Entradas: 1, Salidas: 1 *****
      */
-    public Queue<Slot> Translator(Slot entrada, Queue<Slot> salida, Conenctor cd) throws SQLException {
+    public Queue<Slot> Translator(Slot entrada, Queue<Slot> salida, BD cd) throws SQLException {
         c = cd;
         Slot e;
         boolean h = false;

@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  *
  * @author alberto
  */
-public class Conenctor {
+public class BD {
 
     Connection conne = null;
     Statement st = null;
@@ -40,7 +40,7 @@ public class Conenctor {
             System.out.println("Conectado");
         } catch (ClassNotFoundException | SQLException ex) {
             System.out.println("Error de conexion");
-            Logger.getLogger(Conenctor.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -52,7 +52,7 @@ public class Conenctor {
             System.out.println("Desconectado");
             return desc;
         } catch (SQLException ex) {
-            Logger.getLogger(Conenctor.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return desc;
     }
