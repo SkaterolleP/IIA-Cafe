@@ -5,7 +5,8 @@
  */
 package Conector;
 
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
 import org.w3c.dom.Document;
 
 
@@ -15,107 +16,22 @@ import org.w3c.dom.Document;
  */
 public class Slot {
 
-    private String type[];
-    private String name[];
-    private int idUni;
-    private int idco;
-    private int stock[];
-    private int cantidad;
+    private Queue<Document> buffer;
 
-    private List<Document> d;
-
-    public Document read() {
-        Document ret = d.get(0);
-        d.remove(0);
-        return ret;
-    }
-
-    public void write(Document di) {
-        d.add(di);
+    public Slot(){
+        buffer = new LinkedList<>();
     }
     
-    public int getTamaño(){
-        return d.size();
+    public Document read() {
+        return buffer.poll();
     }
 
-    public Slot() {
-        d = new List<Document>() {};
-        cantidad = 1;
-        type = new String[1];
-        name = new String[1];
-        stock = new int[1];
-        for (int i = 0; i < 1; i++) {
-            stock[i] = -1;
-        }
+    public void write(Document d) {
+        buffer.add(d);
     }
-
-    public Slot(int can) {
-        cantidad = can;
-        type = new String[can];
-        name = new String[can];
-        stock = new int[can];
-        for (int i = 0; i < can; i++) {
-            stock[i] = -1;
-        }
-    }
-
-    Slot(int can, String ty[], String na[]) {
-        cantidad = can;
-        type = new String[can];
-        name = new String[can];
-        stock = new int[can];
-        for (int i = 0; i < can; i++) {
-            type[i] = ty[i];
-            name[i] = na[i];
-        }
-    }
-
-    public String getType(int i) {
-        return type[i];
-    }
-
-    public String getName(int i) {
-        return name[i];
-    }
-
-    public int getIdco() {
-        return idco;
-    }
-
-    public void setIdco(int idco) {
-        this.idco = idco;
-    }
-
-    public int getStock(int i) {
-        return stock[i];
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setType(String type, int i) {
-        this.type[i] = type;
-    }
-
-    public void setName(String name, int i) {
-        this.name[i] = name;
-    }
-
-    public void setStock(int stock, int i) {
-        this.stock[i] = stock;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public int getIdUni() {
-        return idUni;
-    }
-
-    public void setIdUni(int idUni) {
-        this.idUni = idUni;
+    
+    public boolean isEmpty(){
+        return buffer.isEmpty();
     }
 
 }

@@ -5,6 +5,7 @@
  */
 package Conector;
 
+import java.sql.CallableStatement;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -22,7 +23,23 @@ public class BD {
     Connection conne = null;
     Statement st = null;
 
-    public void conectar() {
+    public BD() {
+        conne = null;
+        st = null;
+        String url = "jdbc:mysql://db4free.net:3306/cafedb";
+        String us = "skaterolle";
+        String pass = "melodi16";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            conne = (Connection) DriverManager.getConnection(url, us, pass);
+            System.out.println("Conectado");
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println("Error de conexion");
+            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    void conectar() {
         conne = null;
         st = null;
         String url = "jdbc:mysql://db4free.net:3306/cafedb";
@@ -57,14 +74,26 @@ public class BD {
         return desc;
     }
 
+    public Connection getc() {
+        return conne;
+    }
+
+    public Statement crears() throws SQLException {
+        return conne.createStatement();
+    }
+
+    public CallableStatement prepareCall(String sql) throws SQLException {
+        return conne.prepareCall(sql);
+    }
+
     public boolean consulta(String fro, String dri) throws SQLException {
         Statement stmt = conne.createStatement();
         ResultSet rs = null;
         //System.out.println("Realizo consulta");
-        if("COLD".equals(fro)){
-        rs = stmt.executeQuery("Select stock from COLD where drink='"+ dri +"';");
-        }else{
-        rs = stmt.executeQuery("Select stock from HOT where drink='"+ dri +"';");
+        if ("COLD".equals(fro)) {
+            rs = stmt.executeQuery("Select stock from COLD where drink='" + dri + "';");
+        } else {
+            rs = stmt.executeQuery("Select stock from HOT where drink='" + dri + "';");
         }
         rs.next();
         //System.out.println( "hola--"+rs.getInt(1));

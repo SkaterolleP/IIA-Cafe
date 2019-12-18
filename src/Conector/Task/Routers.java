@@ -58,24 +58,24 @@ public class Routers {
     Slot[] burbuja(Slot[] entrada) {
         for (int i = 0; i < entrada.length; i++) {
             for (int j = 0; j < entrada.length - i - 1; j++) {
-                if (entrada[j].getIdco() < entrada[j + 1].getIdco()) {
+             /*   if (entrada[j].getIdco() < entrada[j + 1].getIdco()) {
                     Slot tmp = entrada[j + 1];
                     entrada[j + 1] = entrada[j];
                     entrada[j] = tmp;
-                }
+                }*/
             }
         }
         return entrada;
     }
 
     int min(Slot entrada[]) {
-        int min = entrada[0].getIdco();
+       /* int min = entrada[0].getIdco();
         for (int i = 0; i < entrada.length; i++) {
             if (entrada[i].getIdco() < min) {
                 min = entrada[i].getIdco();
             }
-        }
-        return min;
+        }*/
+        return 0;
     }
 
     /*  
@@ -99,7 +99,7 @@ public class Routers {
         Entradas: 1, Salidas: n *****
      */
     public void Distributor(Slot Entrada, Queue<Slot> Salida1, Queue<Slot> Salida2) {
-        String com = Entrada.getType(0).replace(" ", "");
+        /*String com = Entrada.getType(0).replace(" ", "");
         Entrada.setIdco(idC);
         idC++;
         //System.out.println(com);
@@ -108,7 +108,7 @@ public class Routers {
             Salida1.add(Entrada);
         } else {
             Salida2.add(Entrada);
-        }
+        }*/
     }
 
     /*
