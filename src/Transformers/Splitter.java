@@ -40,7 +40,6 @@ public class Splitter {
     }
 
     public void run() throws XPathExpressionException, ParserConfigurationException {
-        //System.out.println(d.getElementsByTagName("drink").getLength());
         run2();
         while(!in.isEmpty()){
             d = in.read();

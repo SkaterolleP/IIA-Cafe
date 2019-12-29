@@ -48,7 +48,6 @@ public class Distributor {
             Node nNode = (Node) nl.item(0);
             Element datoe = (Element) nNode;
             dato = new String(datoe.getElementsByTagName("type").item(0).getTextContent().replace(" ", ""));
-            //System.out.println(dato);
             if (dato.equals("hot")) {
                 out1.write(d);
             } else if (dato.equals("cold")) {

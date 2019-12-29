@@ -5,7 +5,6 @@
  */
 package Conector;
 
-import Conector.Task.Transformers;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,6 +40,14 @@ public class ConectorHot extends Conector {
     @Override
     public void run() throws ParserConfigurationException, SAXException, IOException {
         try {
+            Slot sec = new Slot();
+            Slot sec2 = new Slot();
+            while(!in.isEmpty()){
+                Document d = in.read();
+                sec.write(d);
+                sec2.write(d);
+            }
+            in = sec2;
             Translator t = new Translator(in);
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
@@ -56,6 +63,9 @@ public class ConectorHot extends Conector {
                 Element stock = sal.createElement("stock");
                 stock.appendChild(sal.createTextNode(dato));
                 rootElement.appendChild(stock);
+                rootElement.appendChild(stock);Element id = sal.createElement("idCorrelacion");
+                id.appendChild(sal.createTextNode(sec.read().getElementsByTagName("idCorrelacion").item(0).getTextContent()));
+                rootElement.appendChild(id);
                 out.write(sal);
             }
         } catch (SQLException ex) {
